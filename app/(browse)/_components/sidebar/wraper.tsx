@@ -5,6 +5,7 @@ import { useSiderbar } from "@/store/use-side-bar";
 import { useIsClient } from "usehooks-ts";
 import { ToggleSkeleton } from "./toggle";
 import { RecommendedSkeleton } from "./recommended";
+import { FollowingSkeleton } from "./following";
 
 interface WrapperProps {
 	children: React.ReactNode;
@@ -22,6 +23,7 @@ export function Wrapper({ children }: WrapperProps) {
 				)}
 			>
 				<ToggleSkeleton />
+				<FollowingSkeleton />
 				<RecommendedSkeleton />
 			</aside>
 		);
