@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { UserAvatar } from "@/components/ui/user-avatar";
 import { cn } from "@/lib/utils";
-import { useSiderbar } from "@/store/use-side-bar";
+import { useSiderbar } from "@/store/use-sidebar";
 import { usePathname } from "next/navigation";
 
 interface UserItemProps {

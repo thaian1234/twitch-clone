@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useSiderbar } from "@/store/use-sidebar";
+import { useCreatorSiderbar } from "@/store/use-creator-sidebar";
 import { ReactNode, useEffect } from "react";
 import { useMediaQuery } from "usehooks-ts";
 
@@ -10,16 +10,17 @@ interface ContainerProps {
 }
 
 export function Container({ children }: ContainerProps) {
-	const matches = useMediaQuery("(max-width: 1024px");
-	const { collapsed, onCollapse, onExpand } = useSiderbar((state) => state);
+	const { collapsed, onCollapse, onExpand } = useCreatorSiderbar();
 
+	const matches = useMediaQuery(`(max-width: 1024px)`);
 	useEffect(() => {
 		if (matches) {
 			onCollapse();
 		} else {
 			onExpand();
 		}
-	}, [matches, onCollapse, onExpand]);
+	}, [onCollapse, onExpand, matches]);
+
 	return (
 		<div
 			className={cn(
