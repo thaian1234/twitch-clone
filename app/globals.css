@@ -8,6 +8,9 @@ body,
 	height: 100dvh;
 	@apply bg-neutral-900/80;
 }
+* {
+	min-width: 0px;
+}
 
 .hidden-scrollbar {
 	-ms-overflow-style: none;

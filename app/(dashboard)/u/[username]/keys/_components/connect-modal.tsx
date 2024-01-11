@@ -44,7 +44,7 @@ export function ConnectModal() {
 				.catch(() => toast.error("Something went wrong"));
 		});
 	};
-	
+
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
