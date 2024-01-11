@@ -41,18 +41,20 @@ export function Navigation() {
 			</ul>
 		);
 	}
-	
+
 	return (
 		<ul className="space-y-2 px-2 pt-4 lg:pt-0">
-			{routes.map((route) => (
-				<NavItem
-					key={route.href}
-					label={route.label}
-					icon={route.icon}
-					href={route.href}
-					isActive={pathname === route.href}
-				/>
-			))}
+			<li>
+				{routes.map((route) => (
+					<NavItem
+						key={route.href}
+						label={route.label}
+						icon={route.icon}
+						href={route.href}
+						isActive={pathname === route.href}
+					/>
+				))}
+			</li>
 		</ul>
 	);
 }

@@ -21,7 +21,10 @@ export function Toggle() {
 							variant="ghost"
 							className="h-auto p-2"
 						>
-							<ArrowRightFromLine className="size-4" />
+							<ArrowRightFromLine
+								aria-label="expand"
+								className="size-4"
+							/>
 						</Button>
 					</Hint>
 				</div>
@@ -35,7 +38,10 @@ export function Toggle() {
 							className="h-auto ml-auto p-2"
 							variant="ghost"
 						>
-							<ArrowLeftFromLine className="size-4" />
+							<ArrowLeftFromLine
+								aria-label="collapse"
+								className="size-4"
+							/>
 						</Button>
 					</Hint>
 				</div>

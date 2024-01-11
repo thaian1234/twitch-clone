@@ -20,8 +20,8 @@ export function ToggleCard({ label, value = false, field }: ToggleCardProps) {
 	const onchange = () => {
 		startTrasition(() => {
 			updateStream({ [field]: !value })
-				.then(() => toast.success("Chat settings updated"))
-				.catch(() => toast.error("Something weent wrong"));
+				.then(() => toast.success(`${label} settings updated`))
+				.catch(() => toast.error("Something went wrong"));
 		});
 	};
 
