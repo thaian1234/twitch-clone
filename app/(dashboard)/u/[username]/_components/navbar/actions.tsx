@@ -1,10 +1,14 @@
 import Link from "next/link";
 
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, currentUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
+import { delay } from "@/lib/delay";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
-export function Actions() {
+export async function Actions() {
+	const user = await currentUser();
+
 	return (
 		<div className="flex items-center justify-end gap-x-2 ">
 			<Button
@@ -19,7 +23,7 @@ export function Actions() {
 				</Link>
 			</Button>
 
-			<UserButton afterSignOutUrl="/" />
+			{user && <UserButton afterSignOutUrl="/" />}
 		</div>
 	);
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Clapperboard } from "lucide-react";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 export async function Actions() {
 	const user = await currentUser();
@@ -38,8 +39,3 @@ export async function Actions() {
 	);
 }
 
-export function LoadingSpinnerButton() {
-	return (
-		<div className="border-gray-300 size-8 animate-spin rounded-full border-4 border-t-blue-600" />
-	);
-}

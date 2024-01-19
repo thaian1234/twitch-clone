@@ -10,7 +10,6 @@ interface ChatMessageProps {
 
 export function ChatMessage({ data }: ChatMessageProps) {
 	const color = stringToColor(data.from?.name || "");
-	console.log(data.message);
 
 	return (
 		<div className="flex gap-2 p-2 rounded-md hover:bg-white/5">
@@ -22,6 +21,7 @@ export function ChatMessage({ data }: ChatMessageProps) {
 					<span className="truncate" style={{ color: color }}>
 						{data.from?.name}
 					</span>
+					:
 				</p>
 				<p className="text-sm break-all">{data.message}</p>
 			</div>
