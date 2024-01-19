@@ -6,21 +6,35 @@ import { Button } from "@/components/ui/button";
 import { SearchIcon, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { delay } from "@/lib/delay";
+
+interface SearchInput {
+	value: string;
+}
 
 export function Search() {
 	const router = useRouter();
-	const [value, setValue] = useState("");
+	// const [value, setValue] = useState("");
+	const { register, handleSubmit, reset, getFieldState, formState } =
+		useForm<SearchInput>({
+			mode: "onChange",
+			defaultValues: {
+				value: "",
+			},
+		});
+	const { isSubmitting } = formState;
 
-	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	getFieldState("value", formState);
 
-		if (!value) return;
+	const onSubmit = (data: SearchInput) => {
+		if (!data.value) return;
 
 		const url = qs.stringifyUrl(
 			{
 				url: "/search",
 				query: {
-					term: value,
+					term: data.value,
 				},
 			},
 			{
@@ -31,24 +45,27 @@ export function Search() {
 		router.push(url);
 	};
 
-	const onClear = () => {
-		setValue("");
-	};
+	// const onClear = () => {
+	// 	// setValue("");
+	// 	reset();
+	// };
 
 	return (
 		<form
-			onSubmit={onSubmit}
+			onSubmit={handleSubmit(onSubmit)}
 			className="relative w-full lg:w-[400px] flex items-center"
 		>
 			<Input
-				value={value}
-				onChange={(e) => setValue(e.target.value)}
+				{...register("value")}
+				// value={value}
+				// onChange={(e) => setValue(e.target.value)}
+				disabled={isSubmitting}
 				className="rounded-l-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
 				placeholder="Search"
 			/>
-			{value && (
+			{getFieldState("value").isDirty && (
 				<X
-					onClick={onClear}
+					onClick={() => reset()}
 					className="absolute top-2.5 right-14 size-5 text-muted-foreground cursor-pointer hover:opacity-75 transition"
 				/>
 			)}
@@ -57,6 +74,7 @@ export function Search() {
 				size="sm"
 				variant="secondary"
 				className="rounded-l-none"
+				disabled={isSubmitting}
 			>
 				<SearchIcon className="size-5 text-muted-foreground" />
 			</Button>

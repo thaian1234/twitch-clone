@@ -1,17 +1,18 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import { Participant, Track } from "livekit-client";
-import { useEffect, useRef, useState } from "react";
-import { useEventListener } from "usehooks-ts";
 import { useTracks } from "@livekit/components-react";
-import { FullscreenControl } from "./fullscreen-control";
+import { useEventListener } from "usehooks-ts";
+
 import { VolumeControl } from "./volume-control";
+import { FullscreenControl } from "./fullscreen-control";
 
 interface LiveVideoProps {
 	participant: Participant;
 }
 
-export function LiveVideo({ participant }: LiveVideoProps) {
+export const LiveVideo = ({ participant }: LiveVideoProps) => {
 	const videoRef = useRef<HTMLVideoElement>(null);
 	const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -20,7 +21,6 @@ export function LiveVideo({ participant }: LiveVideoProps) {
 
 	const onVolumeChange = (value: number) => {
 		setVolume(+value);
-
 		if (videoRef?.current) {
 			videoRef.current.muted = value === 0;
 			videoRef.current.volume = +value * 0.01;
@@ -69,7 +69,7 @@ export function LiveVideo({ participant }: LiveVideoProps) {
 		<div ref={wrapperRef} className="relative h-full flex">
 			<video ref={videoRef} width="100%" />
 			<div className="absolute top-0 h-full w-full opacity-0 hover:opacity-100 hover:transition-all">
-				<div className="absolute bottom-0  flex h-14 w-full items-center justify-between bg-gradient-to-r from-neutral-900 px-4">
+				<div className="absolute bottom-0 flex h-14 w-full items-center justify-between bg-gradient-to-r from-neutral-900 px-4">
 					<VolumeControl
 						onChange={onVolumeChange}
 						value={volume}
@@ -83,4 +83,4 @@ export function LiveVideo({ participant }: LiveVideoProps) {
 			</div>
 		</div>
 	);
-}
+};

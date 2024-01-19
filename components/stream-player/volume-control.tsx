@@ -36,7 +36,10 @@ export function VolumeControl({
 	return (
 		<div className="flex items-center gap-2">
 			<Hint label={label} asChild>
-				<button className="text-white hover:bg-white/10 p-1.5 rounded-lg">
+				<button
+					onClick={onToggle}
+					className="text-white hover:bg-white/10 p-1.5 rounded-lg"
+				>
 					<Icon className="size-6" />
 				</button>
 			</Hint>

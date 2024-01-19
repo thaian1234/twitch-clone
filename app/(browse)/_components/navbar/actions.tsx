@@ -1,7 +1,8 @@
 import { SignInButton, UserButton, currentUser } from "@clerk/nextjs";
 
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
 import { Clapperboard } from "lucide-react";
 
 export async function Actions() {
@@ -34,5 +35,11 @@ export async function Actions() {
 				</div>
 			)}
 		</div>
+	);
+}
+
+export function LoadingSpinnerButton() {
+	return (
+		<div className="border-gray-300 size-8 animate-spin rounded-full border-4 border-t-blue-600" />
 	);
 }

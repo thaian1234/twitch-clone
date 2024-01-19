@@ -1,7 +1,6 @@
 import { headers } from "next/headers";
 import { WebhookReceiver } from "livekit-server-sdk";
 import { db } from "@/lib/db";
-import { revalidatePath } from "next/cache";
 
 const receiver = new WebhookReceiver(
 	process.env.LIVEKIT_API_KEY!,
@@ -39,4 +38,5 @@ export async function POST(req: Request) {
 			},
 		});
 	}
+	return new Response("", { status: 200 });
 }
