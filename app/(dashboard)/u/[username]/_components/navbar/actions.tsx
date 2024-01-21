@@ -3,8 +3,6 @@ import Link from "next/link";
 import { UserButton, currentUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
-import { delay } from "@/lib/delay";
-import { ReloadIcon } from "@radix-ui/react-icons";
 
 export async function Actions() {
 	const user = await currentUser();
@@ -23,7 +21,7 @@ export async function Actions() {
 				</Link>
 			</Button>
 
-			{user && <UserButton afterSignOutUrl="/" />}
+			<UserButton afterSignOutUrl="/" />
 		</div>
 	);
 }

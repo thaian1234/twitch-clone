@@ -39,7 +39,7 @@ export function StreamPlayer({ user, stream, isFollowing }: StreamPlayerProps) {
 					collapsed && "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2"
 				)}
 			>
-				<div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hiddn-scrollbar pb-10">
+				<div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
 					<Video hostName={user.username} hostIdentity={user.id} />
 					<Header
 						hostName={user.username}

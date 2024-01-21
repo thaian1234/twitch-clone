@@ -14,7 +14,7 @@ export function ChatMessage({ data }: ChatMessageProps) {
 	return (
 		<div className="flex gap-2 p-2 rounded-md hover:bg-white/5">
 			<p className="text-sm text-white/40 min-w-min">
-				{format(data.timestamp, "HH:MM")}
+				{format(data.timestamp, "HH:mm")}
 			</p>
 			<div className="flex flex-wrap items-baseline gap-1 grow">
 				<p className="text-sm font-semibold">
