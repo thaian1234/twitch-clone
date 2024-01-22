@@ -3,13 +3,14 @@ import { db } from "./db";
 
 export const isBlockedByUser = async (id: string) => {
 	try {
-		const self = await getSelf();
-
-		const otherUser = await db.user.findUnique({
+		const selfData = getSelf();
+		const otherUserData = db.user.findUnique({
 			where: {
 				id,
 			},
 		});
+
+		const [self, otherUser] = await Promise.all([selfData, otherUserData]);
 
 		if (!otherUser) throw new Error("User not found");
 
@@ -31,15 +32,16 @@ export const isBlockedByUser = async (id: string) => {
 };
 
 export const blockUser = async (id: string) => {
-	const self = await getSelf();
-
-	if (self.id === id) throw new Error("Cannot block yourself");
-
-	const otherUser = await db.user.findUnique({
+	const selfData = getSelf();
+	const otherUserData = db.user.findUnique({
 		where: {
 			id,
 		},
 	});
+
+	const [self, otherUser] = await Promise.all([selfData, otherUserData]);
+
+	if (self.id === id) throw new Error("Cannot block yourself");
 
 	if (!otherUser) throw new Error("User not found");
 
@@ -68,13 +70,16 @@ export const blockUser = async (id: string) => {
 };
 
 export const unblockUser = async (id: string) => {
-	const self = await getSelf();
+	const selfData = getSelf();
+	const otherUserData = db.user.findUnique({
+		where: {
+			id,
+		},
+	});
+
+	const [self, otherUser] = await Promise.all([selfData, otherUserData]);
 
 	if (self.id === id) throw new Error("Cannot unblock yourself");
-
-	const otherUser = await db.user.findUnique({
-		where: { id },
-	});
 
 	if (!otherUser) throw new Error("User not found");
 

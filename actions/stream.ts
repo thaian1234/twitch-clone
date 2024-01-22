@@ -12,12 +12,16 @@ export const updateStream = async (values: Partial<Stream>) => {
 			where: {
 				userId: self.id,
 			},
+			select: {
+				id: true,
+			},
 		});
 
 		if (!selfStream) throw new Error("Stream not found");
 
 		const validData = {
 			name: values.name,
+			thumbnailUrl: values.thumbnailUrl,
 			isChatEnabled: values.isChatEnabled,
 			isChatFollowersOnly: values.isChatFollowersOnly,
 			isChatDelayed: values.isChatDelayed,
@@ -27,9 +31,7 @@ export const updateStream = async (values: Partial<Stream>) => {
 			where: {
 				id: selfStream.id,
 			},
-			data: {
-				...validData,
-			},
+			data: validData,
 		});
 		revalidatePath(`/u/${self.username}/chat`);
 		revalidatePath(`/u/${self.username}`);

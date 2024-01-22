@@ -15,16 +15,20 @@ export default async function UserPage({ params }: UserPageProps) {
 
 	if (!user) notFound();
 
-	const isFollwing = await isFollwingUser(user.id);
-	const isBlocked = await isBlockedByUser(user.id);
+	const isFollowingData = isFollwingUser(user.id);
+	const isBlockedData = isBlockedByUser(user.id);
+	const [isFollowing, isBlocked] = await Promise.all([
+		isFollowingData,
+		isBlockedData,
+	]);
 
 	return (
 		<div className="flex flex-col gap-y-4">
 			<p>Username: {user.username}</p>
 			<p>User id: {user.id}</p>
-			<p>Is following: {`${isFollwing}`}</p>
+			<p>Is following: {`${isFollowing}`}</p>
 			<p>is blocked by this user: {`${isBlocked}`}</p>
-			<Actions userId={user.id} isFollowing={isFollwing} />
+			<Actions userId={user.id} isFollowing={isFollowing} />
 		</div>
 	);
 }

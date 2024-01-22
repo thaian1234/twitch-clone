@@ -4,9 +4,10 @@ import { ToggleCardSkeleton } from "./_components/toggle-card";
 export default function ChatLoading() {
 	return (
 		<div className="p-6 space-y-4">
-			<Skeleton className="h-10 w-[200px]" />
+			<h1 className="text-2xl font-bold">Chat settings</h1>
+
 			<div className="space-y-4">
-				{[...Array(4)].map((_, i) => (
+				{[...Array(3)].map((_, i) => (
 					<ToggleCardSkeleton key={i} />
 				))}
 			</div>

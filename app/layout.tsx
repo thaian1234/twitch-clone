@@ -3,6 +3,7 @@ import { dark } from "@clerk/themes";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
+
 import { Toaster } from "sonner";
 
 import "./globals.css";

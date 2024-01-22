@@ -37,10 +37,14 @@ export const getFollowedUsers = async () => {
 
 export const isFollwingUser = async (id: string) => {
 	try {
-		const self = await getSelf();
-		const otherUser = await db.user.findUnique({
-			where: { id },
+		const selfData = getSelf();
+		const otherUserData = db.user.findUnique({
+			where: {
+				id,
+			},
 		});
+
+		const [self, otherUser] = await Promise.all([selfData, otherUserData]);
 
 		if (!otherUser) throw new Error("User not found");
 
@@ -60,13 +64,14 @@ export const isFollwingUser = async (id: string) => {
 };
 
 export const followUser = async (id: string) => {
-	const self = await getSelf();
-
-	const otherUser = await db.user.findUnique({
+	const selfData = getSelf();
+	const otherUserData = db.user.findUnique({
 		where: {
 			id,
 		},
 	});
+
+	const [self, otherUser] = await Promise.all([selfData, otherUserData]);
 
 	if (!otherUser) throw new Error("User not found");
 
@@ -96,13 +101,14 @@ export const followUser = async (id: string) => {
 };
 
 export const unfollowUser = async (id: string) => {
-	const self = await getSelf();
-
-	const otherUser = await db.user.findUnique({
+	const selfData = getSelf();
+	const otherUserData = db.user.findUnique({
 		where: {
 			id,
 		},
 	});
+
+	const [self, otherUser] = await Promise.all([selfData, otherUserData]);
 
 	if (!otherUser) throw new Error("User not found");
 
