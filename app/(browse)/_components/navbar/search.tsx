@@ -18,16 +18,15 @@ export function Search() {
 	// const [value, setValue] = useState("");
 	const { register, handleSubmit, reset, getFieldState, formState } =
 		useForm<SearchInput>({
-			mode: "onChange",
 			defaultValues: {
 				value: "",
 			},
 		});
 	const { isSubmitting } = formState;
 
-	getFieldState("value", formState);
+	// getFieldState("value", formState);
 
-	const onSubmit = (data: SearchInput) => {
+	const onSubmit = handleSubmit((data) => {
 		if (!data.value) return;
 
 		const url = qs.stringifyUrl(
@@ -43,7 +42,7 @@ export function Search() {
 		);
 
 		router.push(url);
-	};
+	});
 
 	// const onClear = () => {
 	// 	// setValue("");
@@ -52,7 +51,7 @@ export function Search() {
 
 	return (
 		<form
-			onSubmit={handleSubmit(onSubmit)}
+			onSubmit={onSubmit}
 			className="relative w-full lg:w-[400px] flex items-center"
 		>
 			<Input
@@ -63,7 +62,7 @@ export function Search() {
 				className="rounded-l-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
 				placeholder="Search"
 			/>
-			{getFieldState("value").isDirty && (
+			{getFieldState("value", formState).isDirty && (
 				<X
 					onClick={() => reset()}
 					className="absolute top-2.5 right-14 size-5 text-muted-foreground cursor-pointer hover:opacity-75 transition"

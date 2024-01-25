@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { ElementRef, useRef, useState, useTransition } from "react";
 import { updateStream } from "@/actions/stream";
 import { useRouter } from "next/navigation";
-import { Hint } from "../hint";
+import { Hint } from "@/components/hint";
 import { Trash } from "lucide-react";
 import { onDeleteFile } from "@/actions/upload";
 
