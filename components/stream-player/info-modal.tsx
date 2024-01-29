@@ -6,6 +6,7 @@ import {
 	Dialog,
 	DialogClose,
 	DialogContent,
+	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
@@ -48,6 +49,7 @@ export function InfoModal({
 		}
 	);
 	const [isPending, startTransition] = useTransition();
+	const [isUploading, setIsUploading] = useState(false);
 	const closeRef = useRef<ElementRef<"button">>(null);
 	const thumbnailUrl = getValues("thumbnailUrl");
 
@@ -85,7 +87,11 @@ export function InfoModal({
 					Edit
 				</Button>
 			</DialogTrigger>
-			<DialogContent>
+			<DialogContent
+				onEscapeKeyDown={(e) => {
+					e.key === "esc";
+				}}
+			>
 				<DialogHeader>
 					<DialogTitle>Edit stream info</DialogTitle>
 				</DialogHeader>
@@ -140,28 +146,35 @@ export function InfoModal({
 									}}
 									onClientUploadComplete={(res) => {
 										setValue("thumbnailUrl", res?.[0].url);
+										setIsUploading(false);
 										router.refresh();
-
 										toast.success("Thumbnail uploaded");
+									}}
+									onUploadProgress={() => {
+										setIsUploading(true);
 									}}
 								/>
 							</div>
 						)}
 					</div>
-					<div className="flex justify-between">
+					<DialogFooter>
 						<DialogClose ref={closeRef} asChild>
-							<Button type="button" variant="ghost">
+							<Button
+								disabled={isUploading || isPending}
+								type="button"
+								variant="ghost"
+							>
 								Cancel
 							</Button>
 						</DialogClose>
 						<Button
-							disabled={isPending}
+							disabled={isPending || isUploading}
 							variant="primary"
 							type="submit"
 						>
 							Save
 						</Button>
-					</div>
+					</DialogFooter>
 				</form>
 			</DialogContent>
 		</Dialog>

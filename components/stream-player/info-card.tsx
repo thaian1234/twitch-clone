@@ -4,6 +4,12 @@ import { Pencil } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import { InfoModal } from "./info-modal";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "../ui/accordion";
 
 interface InfoCardProps {
 	name: string;
@@ -44,31 +50,40 @@ export function InfoCard({
 					/>
 				</div>
 				<Separator className="h-1" />
-				<div className="p-4 lg:p-6 space-y-4">
-					<div>
-						<h3 className="text-sm text-muted-foreground mb-2">
-							Name
-						</h3>
-						<p className="text-sm font-semibold">{name}</p>
-					</div>
-					<div>
-						<h3 className="text-sm text-muted-foreground mb-2">
-							Thumbnail
-						</h3>
-						<p className="text-sm font-semibold">
-							{thumbnailUrl && (
-								<div className="relative aspect-video rounded-md overflow-hidden w-[200px] border border-white/10">
-									<Image
-										fill
-										src={thumbnailUrl}
-										alt={name}
-										className="object-cover"
-									/>
+				<Accordion type="single" collapsible className="w-full px-4">
+					<AccordionItem value="item-1">
+						<AccordionTrigger>See more</AccordionTrigger>
+						<AccordionContent>
+							<div className="p-4 lg:p-6 space-y-4">
+								<div>
+									<h3 className="text-sm text-muted-foreground mb-2">
+										Name
+									</h3>
+									<p className="text-sm font-semibold">
+										{name}
+									</p>
 								</div>
-							)}
-						</p>
-					</div>
-				</div>
+								<div>
+									<h3 className="text-sm text-muted-foreground mb-2">
+										Thumbnail
+									</h3>
+									<p className="text-sm font-semibold">
+										{thumbnailUrl && (
+											<div className="relative aspect-video rounded-md overflow-hidden w-[200px] border border-white/10">
+												<Image
+													fill
+													src={thumbnailUrl}
+													alt={name}
+													className="object-cover"
+												/>
+											</div>
+										)}
+									</p>
+								</div>
+							</div>
+						</AccordionContent>
+					</AccordionItem>
+				</Accordion>
 			</div>
 		</div>
 	);

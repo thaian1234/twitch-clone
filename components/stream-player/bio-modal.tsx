@@ -4,6 +4,7 @@ import {
 	Dialog,
 	DialogClose,
 	DialogContent,
+	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
@@ -71,7 +72,7 @@ export function BioModal({ initialValue }: BioModalProps) {
 						className="resize-none"
 					/>
 
-					<div className="flex justify-between">
+					<DialogFooter className="flex justify-between">
 						<DialogClose ref={closeRef} asChild>
 							<Button type="button" variant="ghost">
 								Cancel
@@ -84,7 +85,7 @@ export function BioModal({ initialValue }: BioModalProps) {
 						>
 							Save
 						</Button>
-					</div>
+					</DialogFooter>
 				</form>
 			</DialogContent>
 		</Dialog>

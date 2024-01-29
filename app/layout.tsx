@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 
 import "./globals.css";
+import ReactQueryProviders from "@/provider/react-query-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,14 +25,16 @@ export default function RootLayout({
 		<ClerkProvider appearance={{ baseTheme: dark }}>
 			<html lang="en">
 				<body className={inter.className}>
-					<ThemeProvider
-						attribute="class"
-						forcedTheme="dark"
-						storageKey="gamehub-theme"
-					>
-						<Toaster theme="light" position="bottom-center" />
-						{children}
-					</ThemeProvider>
+					<ReactQueryProviders>
+						<ThemeProvider
+							attribute="class"
+							forcedTheme="dark"
+							storageKey="gamehub-theme"
+						>
+							<Toaster theme="light" position="bottom-center" />
+							{children}
+						</ThemeProvider>
+					</ReactQueryProviders>
 				</body>
 			</html>
 		</ClerkProvider>

@@ -18,7 +18,14 @@ export function ChatMessage({ data }: ChatMessageProps) {
 			</p>
 			<div className="flex flex-wrap items-baseline gap-1 grow">
 				<p className="text-sm font-semibold">
-					<span className="truncate" style={{ color: color }}>
+					<span
+						className="truncate"
+						style={{
+							color: color,
+							WebkitTextStrokeColor: color,
+							WebkitTextStrokeWidth: "0.5px",
+						}}
+					>
 						{data.from?.name}
 					</span>
 					:

@@ -1,12 +1,18 @@
 import { getStreams } from "@/lib/feed-service";
-import { ResultsCard, ResultsCardSkeleton } from "./results-card";
 import { Skeleton } from "@/components/ui/skeleton";
+
+import { ResultsCard, ResultsCardSkeleton } from "./results-card";
+import { ResultsSlider } from "./results-slider";
 
 export async function Results() {
 	const data = await getStreams();
 
 	return (
 		<div>
+			<div className="flex items-center justify-center">
+				<ResultsSlider data={data} />
+			</div>
+
 			<h2 className="text-lg font-semibold mb-4">
 				Streams we think you&apos;ll like
 			</h2>

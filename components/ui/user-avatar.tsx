@@ -40,7 +40,11 @@ export function UserAvatar({
 					avatarSizes({ size })
 				)}
 			>
-				<AvatarImage src={imageUrl} className="object-cover" />
+				<AvatarImage
+					src={imageUrl}
+					className="object-cover"
+					alt="Avatar"
+				/>
 				<AvatarFallback>
 					{username[0]} {username.at(-1)}
 				</AvatarFallback>

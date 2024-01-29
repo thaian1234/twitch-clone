@@ -67,7 +67,7 @@ export function ConnectModal() {
 						</SelectContent>
 					</SelectTrigger>
 				</Select>
-				<Alert>
+				<Alert variant="destructive" className="font-bold">
 					<AlertTriangle className="size-4" />
 					<AlertTitle>Warning!</AlertTitle>
 					<AlertDescription>

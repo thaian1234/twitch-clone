@@ -74,6 +74,7 @@ export function Search() {
 				variant="secondary"
 				className="rounded-l-none"
 				disabled={isSubmitting}
+				aria-label="Search button"
 			>
 				<SearchIcon className="size-5 text-muted-foreground" />
 			</Button>
