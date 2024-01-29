@@ -6,6 +6,7 @@ export const getStreams = async () => {
 
 	try {
 		const self = await getSelf();
+		userId = self.id;
 	} catch (error) {
 		userId = null;
 	}
@@ -46,5 +47,6 @@ export const getStreams = async () => {
 			orderBy: [{ isLive: "desc" }, { updatedAt: "desc" }],
 		});
 	}
+
 	return streams;
 };

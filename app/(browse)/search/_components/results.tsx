@@ -11,7 +11,14 @@ interface ResultsProps {
 	term?: string;
 }
 
-type DataType = Stream & { user: User };
+type SearchResult = {
+	user: User;
+	id: string;
+	name: string;
+	thumbnailUrl: string | null;
+	isLive: boolean;
+	updatedAt: Date;
+};
 
 export function Results({ term }: ResultsProps) {
 	// const [data, setData] = useState<DataType[]>([]);
@@ -31,7 +38,7 @@ export function Results({ term }: ResultsProps) {
 	// }, [term]);
 
 	// if (isLoading || !data) return <ResultsSkeleton />;
-	const { data, isPending } = useQuery<DataType[]>({
+	const { data, isPending } = useQuery<SearchResult[]>({
 		queryKey: ["term", term],
 		queryFn: () => getSearch(term),
 	});
