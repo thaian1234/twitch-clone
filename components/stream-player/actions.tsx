@@ -20,14 +20,15 @@ interface ActionsProps {
 export function Actions({ hostIdentity, isFollowing, isHost }: ActionsProps) {
 	const router = useRouter();
 	// const [isPending, startTransition] = useTransition();
-	const { userId } = useAuth();
+	const { isSignedIn } = useAuth();
 
 	const isFollowingText = isFollowing ? "unfollow" : "follow";
 	const { mutate: handleFollow, isPending } = useMutation({
 		mutationKey: [isFollowingText, hostIdentity],
 		mutationFn: isFollowing ? onUnfollow : onFollow,
+		retry: 3,
 		onError: (error) => {
-			toast.error(error.message);
+			toast.error("Something went wrong");
 		},
 		onSuccess(data) {
 			toast.success(
@@ -35,7 +36,7 @@ export function Actions({ hostIdentity, isFollowing, isHost }: ActionsProps) {
 			);
 		},
 		onMutate() {
-			if (!userId) {
+			if (!isSignedIn) {
 				toast.info("Please sign-in to use this feature");
 				return router.push("/sign-in");
 			}

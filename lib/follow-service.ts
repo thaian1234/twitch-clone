@@ -5,7 +5,7 @@ export const getFollowedUsers = async () => {
 	try {
 		const self = await getSelf();
 
-		const followedUsers = db.follow.findMany({
+		const followedUsers = await db.follow.findMany({
 			where: {
 				followerId: self.id,
 				following: {
@@ -64,14 +64,17 @@ export const isFollwingUser = async (id: string) => {
 };
 
 export const followUser = async (id: string) => {
-	const selfData = getSelf();
-	const otherUserData = db.user.findUnique({
-		where: {
-			id,
-		},
-	});
+	// const selfData = getSelf();
+	// const otherUserData = db.user.findUnique({
+	// 	where: {
+	// 		id,
+	// 	},
+	// });
 
-	const [self, otherUser] = await Promise.all([selfData, otherUserData]);
+	const [self, otherUser] = await Promise.all([
+		getSelf(),
+		db.user.findUnique({ where: { id } }),
+	]);
 
 	if (!otherUser) throw new Error("User not found");
 
@@ -101,14 +104,17 @@ export const followUser = async (id: string) => {
 };
 
 export const unfollowUser = async (id: string) => {
-	const selfData = getSelf();
-	const otherUserData = db.user.findUnique({
-		where: {
-			id,
-		},
-	});
+	// const selfData = getSelf();
+	// const otherUserData = db.user.findUnique({
+	// 	where: {
+	// 		id,
+	// 	},
+	// });
 
-	const [self, otherUser] = await Promise.all([selfData, otherUserData]);
+	const [self, otherUser] = await Promise.all([
+		getSelf(),
+		db.user.findUnique({ where: { id } }),
+	]);
 
 	if (!otherUser) throw new Error("User not found");
 

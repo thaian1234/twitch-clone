@@ -6,8 +6,13 @@ import { getFollowedUsers } from "@/lib/follow-service";
 import { Following, FollowingSkeleton } from "./following";
 
 export async function Sidebar() {
-	const recommended = await getRecommended();
-	const following = await getFollowedUsers();
+	// const recommended = await getRecommended();
+	// const following = await getFollowedUsers();
+
+	const [recommended, following] = await Promise.all([
+		getRecommended(),
+		getFollowedUsers(),
+	]);
 
 	return (
 		<Wrapper>
